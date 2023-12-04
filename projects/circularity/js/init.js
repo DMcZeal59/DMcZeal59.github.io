@@ -20,14 +20,21 @@ var init = function (window) {
         ////////////////////////////////////////////////////////////
         
         // TODO 1 : Declare and initialize our variables
-
-
+        var circle;
+        var circles = [];
         // TODO 2 : Create a function that draws a circle 
-        
+        function drawCircle(){
+            circle = draw.randomCircleInArea(canvas, true, true, "#999", 2);
+            physikz.addRandomVelocity(circle, canvas);
+            view.addChild(circle);
+            circles.push(circle);
+        }
 
         // TODO 3 / 7 : Call the drawCircle() function 
-
-
+        
+        for (var loopsDone = 0; loopsDone < 100; loopsDone++){
+            drawCircle();
+        }
         ////////////////////////////////////////////////////////////
         ///////////////// PROGRAM LOGIC ////////////////////////////
         ////////////////////////////////////////////////////////////
@@ -39,13 +46,16 @@ var init = function (window) {
         */
         function update() {
             // TODO 4 : Update the circle's position //
-
+           //placed in TODO 9 to iterate properly//
             
             // TODO 5 / 10 : Call game.checkCirclePosition() on your circles.
-           
+            //placed in a loop//
 
             // TODO 9 : Iterate over the array
-           
+            for (var add = 0; add < circles.length; add++){
+                circles[add];
+                physikz.updatePosition(circles[add]);
+            }
             
         }
     
@@ -62,8 +72,18 @@ var init = function (window) {
             }
             
             // TODO 6 : YOUR CODE STARTS HERE //////////////////////
-            
-
+            // check for bottom side //
+            if (circle.y > canvas.height) {
+                circle.y = 0;
+            } 
+            // check for left side //
+            if (circle.x < 0) {
+                circle.x = 0;
+            }
+            // check for top side //
+            if (circle.y < 0) {
+                circle.y = 0;
+            }
 
             // YOUR TODO 6 CODE ENDS HERE //////////////////////////
         }
