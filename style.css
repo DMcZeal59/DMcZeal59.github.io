@@ -20,7 +20,14 @@ nav {
 h1 {
     display: flex;
     align-items: center;
-    color: white;
+    color: bisque;
+    flex: 1;
+    margin: 0;
+}
+h2 {
+    display: flex;
+    align-items: center;
+    color: bisque;
     flex: 1;
     margin: 0;
 }
