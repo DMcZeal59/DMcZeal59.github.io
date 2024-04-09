@@ -12,7 +12,7 @@ function runProgram(){
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   
   // Game Item Objects
-  const KEY = {
+  var KEY = {
     LEFT: 37,
     UP: 38,
     DOWN: 40,
@@ -59,13 +59,13 @@ function runProgram(){
     }
   }
   function handleKeyUp(event) {
-    if (event.which !== KEY.LEFT){
+    if (event.which === KEY.LEFT){
       walker.speedX = 0;
-    } else if (event.which !== KEY.RIGHT){
+    } else if (event.which === KEY.RIGHT){
       walker.speedX = 0;
-    } else if (event.which !== KEY.UP){
+    } else if (event.which === KEY.UP){
       walker.speedY = 0;
-    } else if (event.which !== KEY.DOWN){
+    } else if (event.which === KEY.DOWN){
       walker.speedY = 0;
     }
   }
@@ -74,6 +74,8 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+ 
+  
   function repositionGameItem() {
     walker.positionX += walker.speedX; // update the position of the walker along the x-axis
     walker.positionY += walker.speedY; // update the position of the walker along the y-axis
@@ -82,8 +84,12 @@ function runProgram(){
   function redrawGameItem(){
     $("#walker").css("left", walker.positionX); // draw the walker in the new location, positionX pixels away from the "left"
     $("#walker").css("top", walker.positionY); // draw the walker in the new location, positionY pixels away from the "top"
+    $("#walker").css("right", walker.positionX); // draw the walker in the new location, positionX pixels away from the "right"
+    $("#walker").css("bottom", walker.positionY); // draw the walker in the new location, positionY pixels away from the "bottom"
+    
   }
 
+  
   function wallCollision(){
     if (walker.positionX >= $("#board").width() - 51){
       walker.positionX = $("#board").width() - 51;
@@ -102,6 +108,7 @@ function runProgram(){
       walker.speedY = 0;
     }
   }
+ 
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
@@ -109,5 +116,3 @@ function runProgram(){
     // turn off event handlers
     $(document).off();
   }
-  
-
