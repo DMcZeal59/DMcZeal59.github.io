@@ -12,12 +12,6 @@ function runProgram(){
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   
   // Game Item Objects
-
-
-  // one-time setup
-  var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
-  $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
-  $(document).on('keyup', handleKeyUp)
   const KEY = {
     LEFT: 37,
     UP: 38,
@@ -30,6 +24,12 @@ function runProgram(){
    speedX: 0, // the speed for the walker along the x-axis
    speedY: 0, // the speed for the walker along the y-axis
 }
+
+  // one-time setup
+  var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
+  $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
+  $(document).on('keyup', handleKeyUp)
+
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -49,31 +49,23 @@ function runProgram(){
   */
   function handleKeyDown(event) {
     if (event.which === KEY.LEFT){
-      console.log("left pressed")
       walker.speedX = -5;
     } else if (event.which === KEY.RIGHT){
-      console.log("right pressed");
       walker.speedX = 5;
     } else if (event.which === KEY.UP){
-      console.log("up pressed");
       walker.speedY = -5;
     } else if (event.which === KEY.DOWN){
-      console.log("down pressed");
       walker.speedY = 5;
     }
   }
   function handleKeyUp(event) {
-    if (event.which === KEY.LEFT){
-      console.log("left released")
+    if (event.which !== KEY.LEFT){
       walker.speedX = 0;
-    } else if (event.which === KEY.RIGHT){
-      console.log("right released");
+    } else if (event.which !== KEY.RIGHT){
       walker.speedX = 0;
-    } else if (event.which === KEY.UP){
-      console.log("up released");
+    } else if (event.which !== KEY.UP){
       walker.speedY = 0;
-    } else if (event.which === KEY.DOWN){
-      console.log("down released");
+    } else if (event.which !== KEY.DOWN){
       walker.speedY = 0;
     }
   }
@@ -89,21 +81,25 @@ function runProgram(){
   
   function redrawGameItem(){
     $("#walker").css("left", walker.positionX); // draw the walker in the new location, positionX pixels away from the "left"
-    $("#walker").css("up", walker.positionY); // draw the walker in the new location, positionY pixels away from the "top"
-    $("#walker").css("right", walker.positionX); // draw the walker in the new location, positionY pixels away from the "right"
-    $("#walker").css("down", walker.positionY); // draw the walker in the new location, positionY pixels away from the "bottom" 
+    $("#walker").css("top", walker.positionY); // draw the walker in the new location, positionY pixels away from the "top"
   }
 
   function wallCollision(){
-    var rightWall = $("#board").width();
-    var bottomWall = $("#board").height();
-    var leftWall = 0;
-    var topWall = 0;
-    if (walker.positionX == rightWall || leftWall){
-      walker.positionX -= walker.speedX;
+    if (walker.positionX >= $("#board").width() - 51){
+      walker.positionX = $("#board").width() - 51;
+      walker.speedX = 0
     }
-    if (walker.positionY == bottomWall || topWall) {
-      walker.positionY -= walker.speedY;
+    else if (walker.positionX <= 0) {
+      walker.positionX = 0;
+      walker.speedX = 0;
+    }
+    if (walker.positionY >= $("#board").height() - 51) {
+      walker.positionY = $("#board").height() - 51;
+      walker.speedY = 0;
+    }
+    else if (walker.positionY <= 0) {
+      walker.positionY = 0;
+      walker.speedY = 0;
     }
   }
   function endGame() {
