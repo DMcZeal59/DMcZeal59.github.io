@@ -69,7 +69,7 @@ function runProgram(){
       walker.speedY = 0;
     }
   }
-  }
+  
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
@@ -93,7 +93,7 @@ function runProgram(){
   function wallCollision(){
     if (walker.positionX >= $("#board").width() - 51){
       walker.positionX = $("#board").width() - 51;
-      walker.speedX = 0
+      walker.speedX = 0;
     }
     else if (walker.positionX <= 0) {
       walker.positionX = 0;
@@ -116,3 +116,4 @@ function runProgram(){
     // turn off event handlers
     $(document).off();
   }
+}
