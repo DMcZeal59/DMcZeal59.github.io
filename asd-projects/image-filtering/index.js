@@ -20,7 +20,7 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-
+  applyFilter()
   
 
   // do not change the below line of code
@@ -32,6 +32,10 @@ function applyAndRender() {
 /////////////////////////////////////////////////////////
 
 // TODO 1, 2 & 4: Create the applyFilter function here
+function applyFilter() {
+    for (var i = 0; i < gradeList.length; i++) {
+      var value = gradeList[i]
+      for (var g = 0; g < gradeList[i
 
 
 // TODO 7: Create the applyFilterNoBackground function
